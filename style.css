@@ -4,6 +4,7 @@
   max-height: calc(100vh - 120px);
   max-width: 95vw;
   margin: auto;
+  display: none;
 }
 
 h1 {
@@ -13,3 +14,39 @@ h1 {
 h5 {
   text-align: center;
  }
+
+ .StartMenu {
+  height: 1000px;
+  width: 600px;
+  max-height: calc(100vh - 120px);
+  max-width: 95vw;
+  display: block;
+  margin: auto;
+  background-color: pink;
+  text-align: center;
+  font-size: 30px;
+  padding-top: 100px;
+  
+ }
+
+ .SelectLevels {
+  display: none;
+  height: 1000px;
+  width: 600px;
+  max-height: calc(100vh - 120px);
+  max-width: 95vw;
+  /*display: block;*/
+  margin: auto;
+  background-color: green;
+  text-align: center;
+  font-size: 30px;
+  padding-top: 100px;
+ }
+
+ .SelectLevels ul {
+  list-style: none;
+ }
+
+ 
+
+

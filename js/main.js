@@ -17,7 +17,7 @@ const INITIAL_SET = canvas.width / (PLANET_RADIUS * 2);
 const PLANET_SPEED = 40;
 
 let planets = [];
-let colors = ["purple", "orange", "blue"];
+let colors;
 let canon = new Canon();
 
 
@@ -26,9 +26,13 @@ const LIMIT_BOTTOM = 850;
 const LIMIT_TOP = 0;
 
 let status = "GameOn";
+let speed_of_ceiling_fall;
 
 //Creates first shot and first planets
 function createInitialSet() {
+  speed_of_ceiling_fall = 60;
+  colors = ["purple", "orange", "blue", "green"];
+
   for (let num = 50; num < CANVAS_WIDTH; num += 100) {
     let b = new Planet(
       PLANET_RADIUS,
@@ -166,9 +170,10 @@ function updateEverything() {
     if (planets[i].bottom() > LIMIT_BOTTOM && !planets[i].isMoving()) {
       status = "GameOver";
     }
-    if (planets.length===0) {
-      status = "Win";
-    }
+  }
+
+  if (planets.length<2) {
+    status = "Win";
   }
 
   canon.update();
@@ -213,6 +218,8 @@ function removeCollidingBalls(planetShot) {
   planetShot.toRemove = true;
   let itemsToRemove = 1;
 
+  //blackHoleCollision();
+
   for (let n = 0; n < 100; n++) {
     for (let i = 0; i < planets.length; i++) {
       for (let j = i + 1; j < planets.length; j++) {
@@ -226,10 +233,6 @@ function removeCollidingBalls(planetShot) {
           planets[i].toRemove = true;
           planets[j].toRemove = true;
         }
-       /*  else if (checkCollision(planets[i], planets[j]) && planets[i].color === planets[j].color 
-        && (planets[i].color === "black" || planets[j].color === "black")) {
-          
-        } */
       }
     }
   }
@@ -241,6 +244,22 @@ function removeCollidingBalls(planetShot) {
     planets = planets.filter(planet => !planet.toRemove);
     score -= planets.length
   }
+}
+
+function blackHoleCollision() {
+
+  for (let n = 0; n < 100; n++) {
+    for (let i = 0; i < planets.length; i++) {
+      for (let j = i + 1; j < planets.length; j++) { 
+       if (checkCollision(planets[i], planets[j]) &&
+        (planets[i].color === "black") &&
+        ((planets[i].toRemove && !planets[j].toRemove) ||
+          (!planets[i].toRemove && planets[j].toRemove))
+      ) {
+        planets[j].color = "black";
+      }
+      } } }
+
 }
 
 function sunCollision() {
@@ -255,13 +274,9 @@ function sunCollision() {
 }
 }
 
-
-
-
-
 function removeAloneBalls() {
   planets.forEach(p => {
-    if (p.top() <= ceilLevel || p.y > LIMIT_BOTTOM || p.isMoving()) p.score = 1;
+    if (p.top() <= 0 || p.y > LIMIT_BOTTOM || p.isMoving()) p.score = 1;
     else p.score = 0;
   });
 
@@ -351,7 +366,8 @@ function setTime() {
   ++totalSeconds;
   numOfSeconds = numOfDigits(totalSeconds % 60);
   numOfMinutes = numOfDigits(parseInt(totalSeconds / 60));
-  if (totalSeconds != 0 && (totalSeconds % 2) === 0 && ceilLevel < LIMIT_BOTTOM) {
+  console.log(speed_of_ceiling_fall);
+  if (totalSeconds != 0 && (totalSeconds % speed_of_ceiling_fall) === 0 && ceilLevel < LIMIT_BOTTOM) {
     updateCeilLevel();
     fillCeilOfPlanets();
   };
@@ -366,3 +382,64 @@ function numOfDigits(val) {
     return valString;
   }
 }
+
+
+  let goToSelectLevelsMenu;
+
+  let startMenu = document.querySelector(".StartMenu");
+  let levelsMenu = document.querySelector(".SelectLevels");
+  
+  let startButtons = document.querySelectorAll(".StartGameButton");
+  let goToLevelsButton = document.querySelector(".SelectLevelsButton");
+
+  let speedLevelButtons = document.querySelectorAll("button.Speed");
+  let coverageLevelButtons = document.querySelectorAll("button.Coverage");
+
+  for (let i = 0; i < startButtons.length; i++) {
+    startButtons[i].onclick = function() {
+    startMenu.style.display = "none";
+    levelsMenu.style.display = "none";
+    canvas.style.display = "block";
+    };
+  }
+
+  for (let i = 0; i < speedLevelButtons.length; i++) {
+    speedLevelButtons[i].onclick = function() {
+      if (speedLevelButtons[i].classList.contains("Level1") ) {
+        speed_of_ceiling_fall = 15;
+      }
+  
+      if (speedLevelButtons[i].classList.contains("Level2") ) {
+        speed_of_ceiling_fall = 30;
+      }
+  
+      if (speedLevelButtons[i].classList.contains("Level3") ) {
+        speed_of_ceiling_fall = 60;
+      }
+    }
+  }
+
+  for (let i = 0; i < coverageLevelButtons.length; i++) {
+    coverageLevelButtons[i].onclick = function() {
+      if (coverageLevelButtons[i].classList.contains("Level1") ) {
+        colors = ["purple", "orange", "blue", "green", "red", "yellow", "pink", "grey", "white"];
+      }
+  
+      if (coverageLevelButtons[i].classList.contains("Level2") ) {
+        colors = ["purple", "orange", "blue", "green", "red", "yellow"];
+      }
+  
+      if (coverageLevelButtons[i].classList.contains("Level3") ) {
+        colors = ["purple", "orange", "green", "black"];
+      }
+    }
+  }
+
+
+  
+ 
+
+  goToLevelsButton.onclick = function() {
+    startMenu.style.display = "none";
+    levelsMenu.style.display = "block";
+  }

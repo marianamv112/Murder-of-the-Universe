@@ -22,13 +22,14 @@ class Planet {
     }
     
     update() {
+        
             this.x+=this.vx ;
             this.y+=this.vy ;
     
             if (this.rigth() > CANVAS_WIDTH || this.left() < 0 ) {
                 this.vx *= -1;
             }
-            if (this.top() < ceilLevel )  { //500
+            if (this.top() < 0 )  { //500
                 this.stop()
                 this.y = this.radius 
             }
