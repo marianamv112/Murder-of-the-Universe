@@ -12,10 +12,14 @@ class Canon {
 
     this.movementDirection = 1;
     this.angle = 0;
+    this.isMovingLeft = false;
+    this.isMovingRight = false;
   }
 
   draw(ctx) {
     ctx.save();
+    ctx.translate(CANVAS_WIDTH / 2, CANVAS_HEIGHT);
+
     ctx.rotate(this.angle);
 
     ctx.strokeStyle = "brown";
@@ -36,7 +40,8 @@ class Canon {
     ctx.restore();
   }
 
-  update(value) {
-    this.angle += value;
+  update() {
+    if (this.isMovingLeft) this.angle -= 0.02;
+    if (this.isMovingRight) this.angle += 0.02;
   }
 }

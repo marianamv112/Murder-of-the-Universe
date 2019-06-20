@@ -1,12 +1,13 @@
 class Planet {
-    constructor (radius, initialX, initialY, vx, vy, color, active) {
+    constructor (radius, initialX, initialY, color, active) {
         this.radius = radius;
         this.x = initialX;
         this.y = initialY;
-        this.vx = vx;
-        this.vy = vy;
+        this.vx = 0;
+        this.vy = 0;
         this.color = color;
         this.active = active;
+        this.borderWidth = 10
     }
 
     draw(ctx) {
@@ -15,28 +16,42 @@ class Planet {
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
         ctx.fill()
+        ctx.lineWidth = this.borderWidth
+        ctx.stroke()
         ctx.restore()
     }
     
     update() {
-        if(this.active) {
             this.x+=this.vx ;
             this.y+=this.vy ;
     
             if (this.rigth() > CANVAS_WIDTH || this.left() < 0 ) {
                 this.vx *= -1;
             }
-            if (this.top() < 0 )  { //500
-                this.vy = -Math.abs(this.vy);
+            if (this.top() < ceilLevel )  { //500
+                this.stop()
+                this.y = this.radius 
             }
             if (this.bottom() > CANVAS_HEIGHT) {
                 this.vy = -43.5;
-            }
-            // let gravity = 1;
-            // this.vy += gravity;
-        } else {
+            } 
+    }
 
+    stop() {
+        this.vx = 0
+        this.vy = 0
+    }
+    repeal(planet) {
+        let vector = {
+            x: this.x - planet.x,
+            y: this.y - planet.y,
         }
+        let vectorLength = Math.sqrt(vector.x**2 + vector.y**2)
+        this.x += 0.95 * (planet.radius + this.radius - vectorLength) * vector.x / vectorLength
+        this.y += 0.95 * (planet.radius + this.radius - vectorLength) * vector.y / vectorLength
+    }
+    isMoving() {
+        return this.vx !== 0 || this.vy !== 0 
     }
 
     top() {return this.y - this.radius};
@@ -48,6 +63,10 @@ class Planet {
         this.active = true;
         this.vx = PLANET_SPEED * Math.sin(canon.angle)
         this.vy = -PLANET_SPEED * Math.cos(canon.angle)
+    }
+    setToCanon(canon) {
+        this.x = CANVAS_WIDTH/2 + 100 * Math.sin(canon.angle)
+        this.y = CANVAS_HEIGHT - 100 * Math.cos(canon.angle)
     }
     
 }
