@@ -22,7 +22,7 @@ let planetNames = ["mercury", "venus", "mars","earth","jupiter","uranus","neptun
 let canon = new Canon();
 
 let backgroundMusic = new Audio();
-backgroundMusic.src = "/audio/background_audio.mid";
+backgroundMusic.src = "/audio/background.mp3";
 
 let scoreDisplay = document.querySelector("h5");
 const LIMIT_BOTTOM = 850;
@@ -102,13 +102,13 @@ function drawEverything() {
 function drawGame(ctx) {
   ctx.save();
 
- 
-  
-
-
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
   drawLimit(0, LIMIT_BOTTOM, CANVAS_WIDTH, LIMIT_BOTTOM);
   drawLimit(0, ceilLevel, CANVAS_WIDTH, ceilLevel);
+
+  backgroundMusic.loop = true;
+  backgroundMusic.play();
+  
 
   
 
