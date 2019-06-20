@@ -14,6 +14,9 @@ class Canon {
     this.angle = 0;
     this.isMovingLeft = false;
     this.isMovingRight = false;
+
+    this.img = new Image();
+    this.img.src = `/images/canon.png`;
   }
 
   draw(ctx) {
@@ -26,9 +29,9 @@ class Canon {
     ctx.fillStyle = "brown";
 
     ctx.beginPath();
-
+    ctx.drawImage(this.img, -CANON_SIZE , -CANON_SIZE , CANON_SIZE*2, CANON_SIZE*2);
+    ctx.globalAlpha=0;
     ctx.arc(this.bX, this.bY, 10, 0, 2 * Math.PI);
-
     ctx.fill();
 
     ctx.beginPath();

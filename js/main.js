@@ -18,8 +18,11 @@ const PLANET_SPEED = 40;
 
 let planets = [];
 let colors;
+let planetNames = ["mercury", "venus", "mars","earth","jupiter","uranus","neptune","pluto"];
 let canon = new Canon();
 
+let backgroundMusic = new Audio();
+backgroundMusic.src = "/audio/background_audio.mid";
 
 let scoreDisplay = document.querySelector("h5");
 const LIMIT_BOTTOM = 850;
@@ -30,6 +33,8 @@ let speed_of_ceiling_fall;
 
 //Creates first shot and first planets
 function createInitialSet() {
+  
+
   speed_of_ceiling_fall = 60;
   colors = ["purple", "orange", "blue", "green"];
 
@@ -39,12 +44,13 @@ function createInitialSet() {
       num,
       50,
       colors[Math.floor(Math.random() * colors.length)],
-      false
+      false,
+      planetNames[Math.floor(Math.random() * planetNames.length)]
     );
     planets.push(b);
   }
 
-  planets.push(new Planet(PLANET_RADIUS, 300, 900, "purple", false));
+  planets.push(new Planet(PLANET_RADIUS, 300, 900, "purple", false, planetNames[Math.floor(Math.random() * planetNames.length)]));
 }
 
 function fillCeilOfPlanets() {
@@ -54,7 +60,7 @@ function fillCeilOfPlanets() {
       num,
       50,
       colors[Math.floor(Math.random() * colors.length)],
-      false
+      false, planetNames[Math.floor(Math.random() * planetNames.length)]
     );
     planets.unshift(b);
   }
@@ -62,6 +68,7 @@ function fillCeilOfPlanets() {
 
 function drawLimit(startX, startY, endX, endY) {
   ctx.save();
+  ctx.globalAlpha=0;
   ctx.strokeStyle = "red";
   ctx.lineWidth = 1;
   ctx.beginPath();
@@ -90,11 +97,20 @@ function drawEverything() {
   }
 }
 
+
+
 function drawGame(ctx) {
   ctx.save();
+
+ 
+  
+
+
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
   drawLimit(0, LIMIT_BOTTOM, CANVAS_WIDTH, LIMIT_BOTTOM);
   drawLimit(0, ceilLevel, CANVAS_WIDTH, ceilLevel);
+
+  
 
   for (let num = 0; num < planets.length; num++) {
     planets[num].draw(ctx);
@@ -225,7 +241,7 @@ function removeCollidingBalls(planetShot) {
       for (let j = i + 1; j < planets.length; j++) {
         if (
           checkCollision(planets[i], planets[j]) &&
-          planets[i].color === planets[j].color &&
+          planets[i].name === planets[j].name &&
           ((planets[i].toRemove && !planets[j].toRemove) ||
             (!planets[i].toRemove && planets[j].toRemove))
         ) {
@@ -238,7 +254,7 @@ function removeCollidingBalls(planetShot) {
   }
 
   if (itemsToRemove >= 3) {
-    sunCollision();
+    //sunCollision();
 
     score += planets.length
     planets = planets.filter(planet => !planet.toRemove);
@@ -262,7 +278,7 @@ function blackHoleCollision() {
 
 }
 
-function sunCollision() {
+/* function sunCollision() {
   for (let k = 0; k < planets.length; k++) {
     for (let j = 0; j< planets.length; j++ ) {
       if(planets[k].color === "blue" && planets[k].toRemove) {
@@ -272,7 +288,7 @@ function sunCollision() {
     }
   }
 }
-}
+} */
 
 function removeAloneBalls() {
   planets.forEach(p => {
@@ -325,6 +341,7 @@ document.onkeydown = event => {
   //space
   if (event.keyCode === 32) {
     if (status == "GameOn") {
+
       planets[planets.length - 1].launch(canon);
 
       let nextPlanetShot = new Planet(
@@ -332,7 +349,8 @@ document.onkeydown = event => {
         300,
         900,
         colors[Math.floor(Math.random() * colors.length)],
-        false
+        false,
+        planetNames[Math.floor(Math.random() * planetNames.length)]
       );
 
       planets.push(nextPlanetShot);
@@ -397,6 +415,8 @@ function numOfDigits(val) {
 
   for (let i = 0; i < startButtons.length; i++) {
     startButtons[i].onclick = function() {
+    backgroundMusic.play();
+    backgroundMusic.loop = true;
     startMenu.style.display = "none";
     levelsMenu.style.display = "none";
     canvas.style.display = "block";

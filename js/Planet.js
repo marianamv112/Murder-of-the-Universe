@@ -9,19 +9,39 @@ class Planet {
         this.active = active;
         this.name = name;
         this.borderWidth = 10;
+        this.img = new Image();
+        this.img.src = `/images/${this.name}.png`;
     }
 
 
     draw(ctx) {
         ctx.save();
-        ctx.fillStyle = this.color;
         ctx.beginPath()
-        ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
-        ctx.fill()
+
+        ctx.translate(this.x, this.y);
+        let size = 2 * this.radius;
+
+       
+            ctx.drawImage(this.img, -size / 2, -size / 2, size, size);
+        
+
+        
+
         ctx.globalAlpha=0;
+        ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+        ctx.fill();
+       
+        
         ctx.lineWidth = this.borderWidth
         ctx.stroke()
+
+        
+
+        
         ctx.restore()
+
+        
+        
     }
     
     update() {
