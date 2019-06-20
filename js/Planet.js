@@ -22,7 +22,7 @@ class Planet {
         let size = 2 * this.radius;
 
        
-            ctx.drawImage(this.img, -size / 2, -size / 2, size, size);
+        ctx.drawImage(this.img, -size / 2, -size / 2, size, size);
         
 
         
