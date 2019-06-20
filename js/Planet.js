@@ -1,5 +1,5 @@
 class Planet {
-    constructor (radius, initialX, initialY, color, active) {
+    constructor (radius, initialX, initialY, color, active, name) {
         this.radius = radius;
         this.x = initialX;
         this.y = initialY;
@@ -7,8 +7,10 @@ class Planet {
         this.vy = 0;
         this.color = color;
         this.active = active;
-        this.borderWidth = 10
+        this.name = name;
+        this.borderWidth = 10;
     }
+
 
     draw(ctx) {
         ctx.save();
@@ -16,13 +18,14 @@ class Planet {
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
         ctx.fill()
+        ctx.globalAlpha=0;
         ctx.lineWidth = this.borderWidth
         ctx.stroke()
         ctx.restore()
     }
     
     update() {
-        
+
             this.x+=this.vx ;
             this.y+=this.vy ;
     
