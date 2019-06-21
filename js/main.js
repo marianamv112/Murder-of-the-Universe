@@ -25,13 +25,15 @@ let backgroundMusic = new Audio();
 backgroundMusic.src = "audio/background.mp3";
 
 let scoreDisplay = document.querySelector("#scoreDisplay");
-let gameTitle = document.querySelector("#gameTitle");
 
 const LIMIT_BOTTOM = 850;
 const LIMIT_TOP = 0;
 
 let background = new Image();
 background.src = "images/green_background.png";
+
+let background_blue = new Image();
+background.src = "images/blue_background.png";
 
 let status;
 
@@ -101,6 +103,7 @@ function drawEverything() {
       drawGameOver(ctx)
       break;
     case "GameOn":
+       //drawGameOver(ctx)
        drawGame(ctx)
       break;
     case "Win":
@@ -137,16 +140,14 @@ function drawGameOver(ctx) {
   ctx.font = "65px ElectricLiquorGoggles";
   ctx.textAlign = "center";
   ctx.fillStyle = "white";
-  ctx.drawImage(background,0,0); 
+  ctx.drawImage(background_blue,0,0); 
 
   scoreDisplay.style.visibility = "hidden";
   
   ctx.fillText("GAME OVER", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4);
-  
-  ctx.font = "20px Sansus-Webissimo";
+  ctx.font = "30px Sansus-Webissimo";
 
   ctx.fillText("You had one job...", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4 + 40);
-
   ctx.font = "40px Sansus-Webissimo";
 
   ctx.fillText(
@@ -170,22 +171,25 @@ function drawGameWin(ctx) {
   backgroundMusic.pause();
   backgroundMusic.currentTime = 0;
   clearInterval(interval);
-  ctx.drawImage(background,0,0); 
+  
 
   ctx.save();
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  ctx.drawImage(background,0,0); 
   
   ctx.font = "65px ElectricLiquorGoggles";
   ctx.textAlign = "center";
-  ctx.fillStyle = "green";
+  ctx.fillStyle = "white";
 
   scoreDisplay.style.visibility = "hidden";
 
 
-  ctx.fillText("WWWWEEEE!!", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4);
+  ctx.fillText("Congratulations,", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4);
+  ctx.font = "45px ElectricLiquorGoggles";
 
-  ctx.font = "20px Sansus-Webissimo";
-  ctx.fillText("Now I am become Death, the destroyer of worlds", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4 + 40);
+  ctx.fillText("Murder of The Universe!", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4 + 60);
+  ctx.font = "25px Sansus-Webissimo";
+  ctx.fillText("Now I am become Death, the destroyer of worlds", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4 + 90);
   
   ctx.font = "40px Sansus-Webissimo";
 
@@ -385,7 +389,7 @@ document.onkeydown = event => {
 
     if (startMenu.style.display !== "none") {
       startMenu.style.display = "none";
-      levelsMenu.style.display = "block";
+      levelsMenu.style.display = "flex";
     }
   }
 
@@ -441,37 +445,83 @@ function numOfDigits(val) {
     levelsMenu.style.display = "none";
     canvas.style.display = "block";
     scoreDisplay.style.visibility = "visible";
-    gameTitle.style.display = "block";
   }
 
   for (let i = 0; i < speedLevelButtons.length; i++) {
     speedLevelButtons[i].onclick = function() {
       if (speedLevelButtons[i].classList.contains("Level1") ) {
         speed_of_ceiling_fall = 15;
+        speedLevelButtons[i].style.backgroundColor = "white";
+        for (let k = 0; k < speedLevelButtons.length; k++) {
+          if (speedLevelButtons[k] !== speedLevelButtons[i]) {
+            speedLevelButtons[k].style.backgroundColor = "#999";
+          }
+        }
       }
   
       if (speedLevelButtons[i].classList.contains("Level2") ) {
         speed_of_ceiling_fall = 30;
+        speedLevelButtons[i].style.backgroundColor = "white";
+        for (let k = 0; k < speedLevelButtons.length; k++) {
+          if (speedLevelButtons[k] !== speedLevelButtons[i]) {
+            speedLevelButtons[k].style.backgroundColor = "#999";
+          }
+        }
       }
   
       if (speedLevelButtons[i].classList.contains("Level3") ) {
         speed_of_ceiling_fall = 60;
+        speedLevelButtons[i].style.backgroundColor = "white";
+        for (let k = 0; k < speedLevelButtons.length; k++) {
+          if (speedLevelButtons[k] !== speedLevelButtons[i]) {
+            speedLevelButtons[k].style.backgroundColor = "#999";
+          }
+        }
       }
     }
   }
 
   for (let i = 0; i < coverageLevelButtons.length; i++) {
+    
+
+    
     coverageLevelButtons[i].onclick = function() {
+      
       if (coverageLevelButtons[i].classList.contains("Level1") ) {
         planetNames = ["mercury","venus","mars","earth","jupiter","uranus","neptune","pluto","sun"];
-      }
+        coverageLevelButtons[i].style.backgroundColor = "white";
+        for (let k = 0; k < coverageLevelButtons.length; k++) {
+          if (coverageLevelButtons[k] !== coverageLevelButtons[i]) {
+            coverageLevelButtons[k].style.backgroundColor = "#999";
+          }
+        }
+
+      } 
   
       if (coverageLevelButtons[i].classList.contains("Level2") ) {
+        coverageLevelButtons[i].style.backgroundColor = "white";
         planetNames = ["mercury","venus","mars","earth","jupiter","uranus"];
+
+        coverageLevelButtons[i].style.backgroundColor = "white";
+        for (let k = 0; k < coverageLevelButtons.length; k++) {
+          if (coverageLevelButtons[k] !== coverageLevelButtons[i]) {
+            coverageLevelButtons[k].style.backgroundColor = "#999";
+          }
+        }
       }
   
       if (coverageLevelButtons[i].classList.contains("Level3") ) {
-        planetNames = ["mercury","venus","mars"];
+        coverageLevelButtons[i].style.backgroundColor = "white";
+        planetNames = ["mercury","uranus","mars"];
+
+        coverageLevelButtons[i].style.backgroundColor = "white";
+        for (let k = 0; k < coverageLevelButtons.length; k++) {
+          if (coverageLevelButtons[k] !== coverageLevelButtons[i]) {
+            coverageLevelButtons[k].style.backgroundColor = "#999";
+          }
+        }
       }
+
+      
     }
   }
