@@ -32,8 +32,8 @@ const LIMIT_TOP = 0;
 let background = new Image();
 background.src = "images/green_background.png";
 
-let background_blue = new Image();
-background_blue.src = "images/blue_background.png";
+let background_pink = new Image();
+background_pink.src = "images/pink_background.png";
 
 let background_yellow = new Image();
 background_yellow.src = "images/yellow_background.png";
@@ -125,7 +125,7 @@ function drawGame(ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
   drawLimit(0, LIMIT_BOTTOM, CANVAS_WIDTH, LIMIT_BOTTOM);
   drawLimit(0, ceilLevel, CANVAS_WIDTH, ceilLevel);
-  ctx.drawImage(background_blue,0,0); 
+  ctx.drawImage(background_pink,0,0); 
   for (let num = 0; num < planets.length; num++) {
     planets[num].draw(ctx);
   }

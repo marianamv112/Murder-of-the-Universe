@@ -51,7 +51,7 @@ body>h5 {
 
 
   .StartMenu {
-  background-image: url("images/pink_background.png");
+  background-image: url("images/blue_background.png");
 
   height: 1000px;
   width: 600px;
@@ -90,7 +90,7 @@ body>h5 {
  }
 
  .SelectLevels {
-    background-image: url(images/pink_background.png);
+    background-image: url("images/blue_background.png");
     height: 1000px;
     width: 600px;
     text-align: center;
