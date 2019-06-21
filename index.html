@@ -8,33 +8,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Murder of the Universe</h1>
-  <h5>Score: 0 points</h5>
+  <h1 id = 'gameTitle'>Murder of the Universe</h1>
+  <h5 id='scoreDisplay'>Score: 0 points</h5>
+  
   <div class="StartMenu">
-    <div class="h1">Welcome to the Massive Destruction of the Universe!</div>
-    <div class="h5">(actually is just the Solar System)</div>
-    <button class='SelectLevelsButton'>Select Levels</button>
-    <button class='StartGameButton'>DESTROY EVERYTHING NOW</button>
+    <h1>Welcome to the Massive Destruction of the Universe*</h1>
+    <div class="blink_me">Press Space</div>
+    <div class="legendContainer"> <h5>*actually is just the Solar System</h5> </div>
   </div>
+
   <div class="SelectLevels">
-      <div class="h1">How would you like to exterminate?</div>
-      <label for="Speed Level">Speed Level:</label>
-      <ul>
-        <li> <button class='Speed Level1'>As Fast as I can</button></li>
-        <li> <button class='Speed Level2'>The bareness necessities</button></li>
-        <li> <button class='Speed Level3'>Slowly, so I can enjoy every second</button></li>
-      </ul>
-    
-      <label for="Coverage Level">Coverage Level:</label>
-      <ul>
-          <li> <button class='Coverage Level1'>DESTROY DESTROY DESTROY!</button></li>
-          <li><button class='Coverage Level2'>The bareness necessities</button></li>
-          <li> <button class='Coverage Level3'>Just a cute little destruction of the basics</button></li>
-      </ul>
+      <h1>First: How would you like to exterminate?</h1>
+      <div class="speedLevelsContainer">
+          <label for="Speed Level">In terms of speed:</label>
+          <ul>
+              <li> <button class='Speed Level1'>As Fast as I can</button></li>
+              <li> <button class='Speed Level2'>The bareness necessities</button></li>
+              <li> <button class='Speed Level3'>Slowly, so I can enjoy every second</button></li>
+            </ul>
+      </div>
 
-      <h5>"Now I am become Death, the destroyer of worlds"</h5>
-      <button class="StartGameButton">Exactly</button>
-
+      <div class="coverageLevelsContainer">
+          <label for="Coverage Level">In terms of coverage:</label>
+          <ul>
+              <li> <button class='Coverage Level1'>DESTROY EVERYTHING!</button></li>
+              <li><button class='Coverage Level2'>The bareness necessities</button></li>
+              <li> <button class='Coverage Level3'>Just a cute little destruction of the basics</button></li>
+          </ul>
+      </div>
+      <div class="container">
+          <img id='StartButtonImage' src="/images/red_start_button.png">
+      </div>
   </div>
 
   <canvas width="600" height="1000"></canvas>

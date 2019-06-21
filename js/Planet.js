@@ -1,16 +1,15 @@
 class Planet {
-    constructor (radius, initialX, initialY, color, active, name) {
+    constructor (radius, initialX, initialY, active, name) {
         this.radius = radius;
         this.x = initialX;
         this.y = initialY;
         this.vx = 0;
         this.vy = 0;
-        this.color = color;
         this.active = active;
         this.name = name;
         this.borderWidth = 10;
         this.img = new Image();
-        this.img.src = `/${this.name}.png`;
+        this.img.src = `/images/${this.name}.png`;
     }
 
 
@@ -21,23 +20,19 @@ class Planet {
         ctx.translate(this.x, this.y);
         let size = 2 * this.radius;
 
-       
-        ctx.drawImage(this.img, -size / 2, -size / 2, size, size);
+        if (this.name === "sun") {
+            ctx.drawImage(this.img, -size / 1.5, -size / 2, size*1.3, size*1.3);
+        } else {
+            ctx.drawImage(this.img, -size / 2, -size / 2, size, size);
+        }
         
-
-        
-
         ctx.globalAlpha=0;
         ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
         ctx.fill();
        
-        
         ctx.lineWidth = this.borderWidth
         ctx.stroke()
 
-        
-
-        
         ctx.restore()
 
         

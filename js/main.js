@@ -10,47 +10,63 @@ let totalSeconds = 0;
 
 let numOfSeconds = 0;
 let numOfMinutes = 0;
-let interval = setInterval(setTime, 1000);
+let interval;
 
 const PLANET_RADIUS = 50;
 const INITIAL_SET = canvas.width / (PLANET_RADIUS * 2);
 const PLANET_SPEED = 40;
 
 let planets = [];
-let colors;
-let planetNames = ["mercury", "venus", "mars","earth","jupiter","uranus","neptune","pluto"];
+
+let planetNames;
 let canon = new Canon();
 
 let backgroundMusic = new Audio();
 backgroundMusic.src = "/audio/background.mp3";
 
-let scoreDisplay = document.querySelector("h5");
+let scoreDisplay = document.querySelector("#scoreDisplay");
+let gameTitle = document.querySelector("#gameTitle");
+
 const LIMIT_BOTTOM = 850;
 const LIMIT_TOP = 0;
 
-let status = "GameOn";
+let background = new Image();
+background.src = "/images/green_background.png";
+
+let status;
+
 let speed_of_ceiling_fall;
+
+let goToSelectLevelsMenu;
+
+  let startMenu = document.querySelector(".StartMenu");
+  let levelsMenu = document.querySelector(".SelectLevels");
+  
+  let startButtons = document.querySelectorAll(".StartGameButton");
+  let goToLevelsButton = document.querySelector(".SelectLevelsButton");
+
+  let speedLevelButtons = document.querySelectorAll("button.Speed");
+  let coverageLevelButtons = document.querySelectorAll("button.Coverage");
 
 //Creates first shot and first planets
 function createInitialSet() {
   
 
   speed_of_ceiling_fall = 60;
-  colors = ["purple", "orange", "blue", "green"];
+  planetNames = ["mercury", "venus", "mars","earth","sun"]
 
   for (let num = 50; num < CANVAS_WIDTH; num += 100) {
     let b = new Planet(
       PLANET_RADIUS,
       num,
       50,
-      colors[Math.floor(Math.random() * colors.length)],
       false,
       planetNames[Math.floor(Math.random() * planetNames.length)]
     );
     planets.push(b);
   }
 
-  planets.push(new Planet(PLANET_RADIUS, 300, 900, "purple", false, planetNames[Math.floor(Math.random() * planetNames.length)]));
+  planets.push(new Planet(PLANET_RADIUS, 300, 900, false, planetNames[Math.floor(Math.random() * planetNames.length)]));
 }
 
 function fillCeilOfPlanets() {
@@ -59,7 +75,6 @@ function fillCeilOfPlanets() {
       PLANET_RADIUS,
       num,
       50,
-      colors[Math.floor(Math.random() * colors.length)],
       false, planetNames[Math.floor(Math.random() * planetNames.length)]
     );
     planets.unshift(b);
@@ -78,7 +93,6 @@ function drawLimit(startX, startY, endX, endY) {
   ctx.restore();
 }
 
-
 // To draw things on the canvas
 // Don't change any variable (except ctx) in this function
 function drawEverything() {
@@ -87,7 +101,7 @@ function drawEverything() {
       drawGameOver(ctx)
       break;
     case "GameOn":
-      drawGame(ctx)
+       drawGame(ctx)
       break;
     case "Win":
       drawGameWin(ctx)
@@ -99,19 +113,13 @@ function drawEverything() {
 
 
 
+
 function drawGame(ctx) {
   ctx.save();
-
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
   drawLimit(0, LIMIT_BOTTOM, CANVAS_WIDTH, LIMIT_BOTTOM);
   drawLimit(0, ceilLevel, CANVAS_WIDTH, ceilLevel);
-
-  backgroundMusic.loop = true;
-  backgroundMusic.play();
-  
-
-  
-
+  ctx.drawImage(background,0,0); 
   for (let num = 0; num < planets.length; num++) {
     planets[num].draw(ctx);
   }
@@ -120,16 +128,26 @@ function drawGame(ctx) {
 }
 
 function drawGameOver(ctx) {
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
+
   clearInterval(interval);
   ctx.save();
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-  ctx.font = "100px Arial";
+  ctx.font = "65px ElectricLiquorGoggles";
   ctx.textAlign = "center";
   ctx.fillStyle = "white";
+  ctx.drawImage(background,0,0); 
 
-  scoreDisplay.style.display = "None";
-  ctx.fillText("GAME OVER", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 30);
-  ctx.font = "40px Arial";
+  scoreDisplay.style.visibility = "hidden";
+  
+  ctx.fillText("GAME OVER", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4);
+  
+  ctx.font = "20px Sansus-Webissimo";
+
+  ctx.fillText("You had one job...", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4 + 40);
+
+  ctx.font = "40px Sansus-Webissimo";
 
   ctx.fillText(
     `YOUR TIME: ${numOfMinutes} : ${numOfSeconds}`,
@@ -149,17 +167,27 @@ function drawGameOver(ctx) {
 }
 
 function drawGameWin(ctx) {
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
   clearInterval(interval);
+  ctx.drawImage(background,0,0); 
+
   ctx.save();
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   
-  ctx.font = "100px Arial";
+  ctx.font = "65px ElectricLiquorGoggles";
   ctx.textAlign = "center";
   ctx.fillStyle = "green";
 
-  scoreDisplay.style.display = "None";
-  ctx.fillText("CONGRATS!", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 30);
-  ctx.font = "40px Arial";
+  scoreDisplay.style.visibility = "hidden";
+
+
+  ctx.fillText("WWWWEEEE!!", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4);
+
+  ctx.font = "20px Sansus-Webissimo";
+  ctx.fillText("Now I am become Death, the destroyer of worlds", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 4 + 40);
+  
+  ctx.font = "40px Sansus-Webissimo";
 
   ctx.fillText(
     `YOUR TIME: ${numOfMinutes} : ${numOfSeconds}`,
@@ -254,7 +282,7 @@ function removeCollidingBalls(planetShot) {
   }
 
   if (itemsToRemove >= 3) {
-    //sunCollision();
+    sunCollision();
 
     score += planets.length
     planets = planets.filter(planet => !planet.toRemove);
@@ -262,7 +290,7 @@ function removeCollidingBalls(planetShot) {
   }
 }
 
-function blackHoleCollision() {
+/* function blackHoleCollision() {
 
   for (let n = 0; n < 100; n++) {
     for (let i = 0; i < planets.length; i++) {
@@ -276,19 +304,19 @@ function blackHoleCollision() {
       }
       } } }
 
-}
+} */
 
-/* function sunCollision() {
+function sunCollision() {
   for (let k = 0; k < planets.length; k++) {
     for (let j = 0; j< planets.length; j++ ) {
-      if(planets[k].color === "blue" && planets[k].toRemove) {
-        if (planets[j].color === "blue") {
+      if(planets[k].name === "sun" && planets[k].toRemove) {
+        if (planets[j].name === "sun") {
         planets[j].toRemove = true;
       }
     }
   }
 }
-} */
+}
 
 function removeAloneBalls() {
   planets.forEach(p => {
@@ -340,23 +368,24 @@ animation();
 document.onkeydown = event => {
   //space
   if (event.keyCode === 32) {
-    if (status == "GameOn") {
-
+    if (status === "GameOn") {
       planets[planets.length - 1].launch(canon);
-
       let nextPlanetShot = new Planet(
         PLANET_RADIUS,
         300,
         900,
-        colors[Math.floor(Math.random() * colors.length)],
         false,
         planetNames[Math.floor(Math.random() * planetNames.length)]
       );
-
       planets.push(nextPlanetShot);
-    } else {
+    } else if (status === "GameOver" || status === "Win") {
       status = "GameOn";
       location.reload();
+    }
+
+    if (startMenu.style.display !== "none") {
+      startMenu.style.display = "none";
+      levelsMenu.style.display = "block";
     }
   }
 
@@ -384,7 +413,6 @@ function setTime() {
   ++totalSeconds;
   numOfSeconds = numOfDigits(totalSeconds % 60);
   numOfMinutes = numOfDigits(parseInt(totalSeconds / 60));
-  console.log(speed_of_ceiling_fall);
   if (totalSeconds != 0 && (totalSeconds % speed_of_ceiling_fall) === 0 && ceilLevel < LIMIT_BOTTOM) {
     updateCeilLevel();
     fillCeilOfPlanets();
@@ -402,25 +430,18 @@ function numOfDigits(val) {
 }
 
 
-  let goToSelectLevelsMenu;
+  let startButton = document.getElementById("StartButtonImage");
 
-  let startMenu = document.querySelector(".StartMenu");
-  let levelsMenu = document.querySelector(".SelectLevels");
-  
-  let startButtons = document.querySelectorAll(".StartGameButton");
-  let goToLevelsButton = document.querySelector(".SelectLevelsButton");
-
-  let speedLevelButtons = document.querySelectorAll("button.Speed");
-  let coverageLevelButtons = document.querySelectorAll("button.Coverage");
-
-  for (let i = 0; i < startButtons.length; i++) {
-    startButtons[i].onclick = function() {
+  startButton.onclick = function() { 
+    status = "GameOn";
     backgroundMusic.play();
     backgroundMusic.loop = true;
+    interval = setInterval(setTime, 1000)
     startMenu.style.display = "none";
     levelsMenu.style.display = "none";
     canvas.style.display = "block";
-    };
+    scoreDisplay.style.visibility = "visible";
+    gameTitle.style.display = "block";
   }
 
   for (let i = 0; i < speedLevelButtons.length; i++) {
@@ -442,24 +463,15 @@ function numOfDigits(val) {
   for (let i = 0; i < coverageLevelButtons.length; i++) {
     coverageLevelButtons[i].onclick = function() {
       if (coverageLevelButtons[i].classList.contains("Level1") ) {
-        colors = ["purple", "orange", "blue", "green", "red", "yellow", "pink", "grey", "white"];
+        planetNames = ["mercury","venus","mars","earth","jupiter","uranus","neptune","pluto","sun"];
       }
   
       if (coverageLevelButtons[i].classList.contains("Level2") ) {
-        colors = ["purple", "orange", "blue", "green", "red", "yellow"];
+        planetNames = ["mercury","venus","mars","earth","jupiter","uranus"];
       }
   
       if (coverageLevelButtons[i].classList.contains("Level3") ) {
-        colors = ["purple", "orange", "green", "black"];
+        planetNames = ["mercury","venus","mars"];
       }
     }
-  }
-
-
-  
- 
-
-  goToLevelsButton.onclick = function() {
-    startMenu.style.display = "none";
-    levelsMenu.style.display = "block";
   }
