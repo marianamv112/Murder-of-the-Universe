@@ -76,6 +76,7 @@ body>h5 {
 
  .SelectLevels {
   background-image: url("images/green_background.png");
+ 
   box-sizing: border-box;
   height: 1000px;
   width: 600px;

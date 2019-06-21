@@ -17,6 +17,7 @@ class Canon {
 
     this.img = new Image();
     this.img.src = "images/canon.png";
+    this.img.src = "/Users/mariana/Documents/IronHack/WebDev Bootcamp/code/w3/Project /images/canon.png";
   }
 
   draw(ctx) {
