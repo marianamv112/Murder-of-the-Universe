@@ -55,7 +55,7 @@ function createInitialSet() {
   
 
   speed_of_ceiling_fall = 60;
-  planetNames = ["mercury", "venus", "mars","earth","sun"]
+  planetNames = ["mercury", "uranus", "mars","earth","sun"]
 
   for (let num = 50; num < CANVAS_WIDTH; num += 100) {
     let b = new Planet(
@@ -500,7 +500,7 @@ function numOfDigits(val) {
   
       if (coverageLevelButtons[i].classList.contains("Level2") ) {
         coverageLevelButtons[i].style.backgroundColor = "white";
-        planetNames = ["mercury","venus","mars","earth","jupiter","uranus"];
+        planetNames = ["mercury","neptune","mars","earth","jupiter","uranus"];
 
         coverageLevelButtons[i].style.backgroundColor = "white";
         for (let k = 0; k < coverageLevelButtons.length; k++) {
