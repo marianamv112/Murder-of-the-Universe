@@ -22,7 +22,7 @@ let planetNames;
 let canon = new Canon();
 
 let backgroundMusic = new Audio();
-backgroundMusic.src = "/audio/background.mp3";
+backgroundMusic.src = "audio/background.mp3";
 
 let scoreDisplay = document.querySelector("#scoreDisplay");
 let gameTitle = document.querySelector("#gameTitle");
@@ -31,7 +31,7 @@ const LIMIT_BOTTOM = 850;
 const LIMIT_TOP = 0;
 
 let background = new Image();
-background.src = "/images/green_background.png";
+background.src = "images/green_background.png";
 
 let status;
 

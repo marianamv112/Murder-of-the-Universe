@@ -9,7 +9,8 @@ class Planet {
         this.name = name;
         this.borderWidth = 10;
         this.img = new Image();
-        this.img.src = `../images/${this.name}.png`;
+        
+        this.img.src = `images/${this.name}.png`
     }
 
 

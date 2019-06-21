@@ -16,7 +16,7 @@ class Canon {
     this.isMovingRight = false;
 
     this.img = new Image();
-    this.img.src = `/images/canon.png`;
+    this.img.src = "images/canon.png";
   }
 
   draw(ctx) {
