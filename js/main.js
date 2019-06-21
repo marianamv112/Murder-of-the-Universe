@@ -31,7 +31,7 @@ const LIMIT_BOTTOM = 850;
 const LIMIT_TOP = 0;
 
 let background = new Image();
-background.src = "/Users/mariana/Documents/IronHack/WebDev Bootcamp/code/w3/Project /images/green_background.png";
+background.src = "images/green_background.png";
 
 let status;
 

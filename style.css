@@ -45,9 +45,8 @@ body>h5 {
   .StartMenu {
   background-image: url("images/green_background.png");
   box-sizing: border-box;
-  height: 1000px;
-  width: 600px;
-  max-height: calc(100vh - 120px);
+  max-height: 1000px;
+  max-width: 600px;
   display: flex; /*flex*/
   margin: auto;
   text-align: center;
@@ -81,9 +80,8 @@ body>h5 {
   background-image: url("images/green_background.png");
  
   box-sizing: border-box;
-  height: 1000px;
-  width: 600px;
-  max-height: calc(100vh - 120px);
+  max-height: 1000px;
+  max-width: 600px;
   display: none; /*flex*/
   margin: auto;
   text-align: center;
