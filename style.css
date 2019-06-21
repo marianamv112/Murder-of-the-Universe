@@ -41,7 +41,7 @@ body>h5 {
   display:none;
 }
 
-@media (max-width: 600px) {
+
   .StartMenu {
   background-image: url("images/green_background.png");
   box-sizing: border-box;
@@ -57,7 +57,7 @@ body>h5 {
   justify-content: space-between;
   color: #999999;
   }
-}
+
 
 
  .StartMenu h1, .GameOverMenu h1 {
