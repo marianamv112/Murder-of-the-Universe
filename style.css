@@ -51,7 +51,7 @@ body>h5 {
 
 
   .StartMenu {
-  background-image: url("images/green_background.png");
+  background-image: url("images/pink_background.png");
 
   height: 1000px;
   width: 600px;
@@ -90,7 +90,7 @@ body>h5 {
  }
 
  .SelectLevels {
-    background-image: url(images/green_background.png);
+    background-image: url(images/pink_background.png);
     height: 1000px;
     width: 600px;
     text-align: center;
@@ -146,9 +146,6 @@ li>button:active {
   box-shadow: 0 1px #999;
   transform: translateY(1px);
 }
-li>.button-on{
-  background:red;
-  }
  
  #StartButtonImage{
   max-width: 20%;

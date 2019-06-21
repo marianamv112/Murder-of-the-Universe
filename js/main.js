@@ -33,7 +33,10 @@ let background = new Image();
 background.src = "images/green_background.png";
 
 let background_blue = new Image();
-background.src = "images/blue_background.png";
+background_blue.src = "images/blue_background.png";
+
+let background_yellow = new Image();
+background_yellow.src = "images/yellow_background.png";
 
 let status;
 
@@ -122,7 +125,7 @@ function drawGame(ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
   drawLimit(0, LIMIT_BOTTOM, CANVAS_WIDTH, LIMIT_BOTTOM);
   drawLimit(0, ceilLevel, CANVAS_WIDTH, ceilLevel);
-  ctx.drawImage(background,0,0); 
+  ctx.drawImage(background_blue,0,0); 
   for (let num = 0; num < planets.length; num++) {
     planets[num].draw(ctx);
   }
@@ -140,7 +143,7 @@ function drawGameOver(ctx) {
   ctx.font = "65px ElectricLiquorGoggles";
   ctx.textAlign = "center";
   ctx.fillStyle = "white";
-  ctx.drawImage(background_blue,0,0); 
+  ctx.drawImage(background_yellow,0,0); 
 
   scoreDisplay.style.visibility = "hidden";
   
@@ -172,7 +175,6 @@ function drawGameWin(ctx) {
   backgroundMusic.currentTime = 0;
   clearInterval(interval);
   
-
   ctx.save();
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   ctx.drawImage(background,0,0); 
