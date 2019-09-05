@@ -39,7 +39,7 @@ what reduces considerabily the number of proability of provoking a collision, co
 <h3>Improvements to do, bugs and limitations:</h3>
 <p>The collision detection was the most complicated part to implement and for sure would need some improvement in order to 
 accurately computed where the planet should stay sticked and the detection of the planet borders</p>
-<p>The first, second and third </p>
+<p>The first and the second screen are not responsive and not dimensioned in the same size of the canvas used for the game board </p>
 
 <h3>Future work:</h3>
 <p>A new type of special planet - the black hole - that would clean a complete row of planets in the board.</p>
