@@ -1,7 +1,5 @@
 # Murder-of-the-Universe
 
-<h2>This is the repository of my first Ironhack Web Dev bootcamp project: Coding a game.</h2>
-
 <h3>Concept and inspiration:</h3>
 <p><b> Murder of The Universe </b> was inspired by the classic Arcade Game Puzzle Bubble and King Gizzard album with the same name.</p>
 <p> In the moment of choosing a game to code, I decided to go for something similar to Puzzle Bubble, since it was one my personal favorites. 
