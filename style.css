@@ -31,6 +31,7 @@ body,html {
   animation: blinker 1s linear infinite;
   color: white;
   z-index: 1000;
+  margin-bottom: auto;
 }
 
 @keyframes blinker {
@@ -56,17 +57,18 @@ body>h5 {
   height: 1000px;
   width: 600px;
   display: flex; /*flex*/
-  
+   
   text-align: center;
   font-size: 30px;
   
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   color: white;
 
   max-height: calc(100vh - 120px);
   max-width: 44vw;
   margin: auto;
+
   
   }
 
@@ -77,6 +79,7 @@ body>h5 {
  
   padding-top: 100px;
   padding-bottom:30px;
+  padding: 100px 30px 20px 20px;
  }
  
  .GameOverMenu h5 {
@@ -84,8 +87,10 @@ body>h5 {
  }
 
  .StartMenu h5 {
+   margin: auto;
    text-align: left;
-   padding-left: 10px;
+   padding-left: 20px;
+   padding-bottom: 20px;
    font-size: 20px;
  }
 
@@ -151,10 +156,60 @@ li>button:active {
   max-width: 20%;
   opacity: 0.95;
  }
+ @media only screen and (max-width: 700px) {
+  .StartMenu {
+    text-align: center;
+    font-size: 20px;
+    
+    flex-direction: column;
+    justify-content: space-around;
+    color: white;
+  
+    max-height: calc(100vh - 120px);
+    max-width: 44vw;
+    margin: auto;
+  }
+  .StartMenu h5{
+    font-size: 17px;
+  }
+  .blink_me{
+    padding-bottom: 20px;
+  }
+  li>button {
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 0 1px #999;
+    height: auto;
+    border-radius: 5px;
+    color:  black;
+    background-color: #999;
+    font-family: Sansus-Webissimo;
+    opacity: 0.8;
+    font-size: smaller;
+  }
+}
+@media only screen and (max-width: 800px) {
 
+  .blink_me{
+    padding-bottom: 20px;
+  }
 
-
-
- 
-
-
+@media only screen and (max-height: 800px) {
+  .StartMenu {
+    flex-direction: column;
+    justify-content: space-around;
+    color: white;
+    font-size: 20px;
+  
+    max-height: calc(100vh - 120px);
+    max-width: 44vw;
+    margin: auto;
+  }
+  .blink_me{
+    padding-bottom: 20px;
+  }
+  h5{
+      padding-bottom: 20px;
+    }
+  }
+}
