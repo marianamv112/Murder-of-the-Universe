@@ -160,13 +160,7 @@ li>button:active {
   .StartMenu {
     text-align: center;
     font-size: 20px;
-    
-    flex-direction: column;
     justify-content: space-around;
-    color: white;
-  
-    max-height: calc(100vh - 120px);
-    max-width: 44vw;
     margin: auto;
   }
   .StartMenu h5{
@@ -178,13 +172,7 @@ li>button:active {
   li>button {
     margin-left: 10px;
     margin-right: 10px;
-    box-shadow: 0 1px #999;
     height: auto;
-    border-radius: 5px;
-    color:  black;
-    background-color: #999;
-    font-family: Sansus-Webissimo;
-    opacity: 0.8;
     font-size: smaller;
   }
 }
@@ -198,11 +186,7 @@ li>button:active {
   .StartMenu {
     flex-direction: column;
     justify-content: space-around;
-    color: white;
     font-size: 20px;
-  
-    max-height: calc(100vh - 120px);
-    max-width: 44vw;
     margin: auto;
   }
   .blink_me{
@@ -210,6 +194,5 @@ li>button:active {
   }
   h5{
       padding-bottom: 20px;
-    }
   }
 }
